@@ -1,0 +1,33 @@
+=>ORDER BY (key word) Using for sorting Our Results
+
+ORDER BY Syntax (Ascending/Descending)
+
+Method 1
+SELECT * FROM tablename
+ORDER BY columnname ASC|DESC
+
+_________________________________________________________________
+
+=>EXERCISE
+
+SELECT * FROM dbhomeworks;
+
+SELECT * FROM dbhomeworks ORDER BY firstname ASC;
+
+SELECT * FROM dbhomeworks ORDER BY firstname DESC;
+
+SELECT * FROM dbhomeworks
+WHERE city='yangon' ORDER BY firstname ASC;
+
+SELECT * FROM eployees ORDER BY name,age;
+
+SELECT name,age,salary FROM employees ORDER BY name;
+
+SELECT name,age,salary FROM employees ORDER BY 3;
+SELECT name,age,salary FROM employees ORDER BY 2;
+
+SELECT name,age,salary FROM employees ORDER BY 3 DESC;
+SELECT name,age,salary FROM employees ORDER BY 2 DESC;
+
+
+24ASC 

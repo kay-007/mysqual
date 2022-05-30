@@ -1,0 +1,60 @@
+=>Temporary Table
+=Syntax
+CREATE TABLE IF NOT EXISTS tabelname(
+	col1 datatype,
+	col2 datatype,
+	col3 datatype,
+);
+
+CREATE TEMPORARY TABLE IF NOT EXISTS workers(
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(20),
+	age INT,
+	city VARCHAR(50),
+	PRIMARY KEY(id)
+);
+
+DESC workers;
+
+SHOW TABLES; // doesn't shown in table list
+
+INSERT INTO workers(name,age,city)
+VALUES ('aung aung',20,'yangon'),
+('kyaw kyaw',30,'mandalay');
+
+SELECT* FROM workers;
+
+CREATE TEMPORARY TABLE IF NOT EXISTS workers(
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(20),
+	age INT,
+	city VARCHAR(50),
+	PRIMARY KEY(id)
+);
+
+INSERT INTO workers(name,age,city)
+VALUES ('aung aung',20,'yangon'),
+('kyaw kyaw',30,'mandalay');
+
+SELECT * FROM workers;
+
+USE wdf6179;
+SELECT * FROM workers;
+USE wdf6534;
+SELECT * FROM workers; --(still have)
+
+===create table and then change table name
+ALTER TABLE workers
+RENAME to employeeguys;
+
+SELECT * FROM workers; --(gone)
+SELECT * FROM employeeguys; 
+
+=>DROP temporary table
+DROP TABLE employeeguys;
+DROP TABLE IF EXISTS employeeguys;
+DROP TEMPORARY TABLE employeeguys;
+DROP TEMPORARY TABLE IF EXISTS employeeguys;
+
+________________________________________________________
+

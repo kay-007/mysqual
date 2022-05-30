@@ -1,0 +1,115 @@
+
+
+
+
+_________________________________________________________
+
+=>Account Lock
+
+=Syntax : ( By new suer)
+CREATE USER username IDENTFIED BY 'password' ACCOUNT LOCK;
+
+
+=Syntax : ( To existing user)
+ALTER USER username IDENTIFIED BY 'password' ACCOUNT LOCK;
+
+SELECT USER FROM mysql.user WHERE USER LIKE 'k%';
+
+
+=By user new
+
+CREATE USER 'wym007'@'localhost' IDENTIFIED BY '123456789' ACCOUNT LOCK;
+
+SELECT USER FROM mysql.user WHERE USER LIKE 'wym%';
+
+
+*error = Account is locked
+\q
+mysql -u wym007 -p'123456789'
+
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user;
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user WHERE USER LIKE 'k%';
+
+-----
+
+=To existing user
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user WHERE USER LIKE 'wym%';
+
+ALTER USER 'wym006'@'localhost' ACCOUNT LOCK;
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user WHERE USER LIKE 'wym%';
+
+*error = Account is locked
+\q
+mysql -u wym006 -p'123456789'
+
+______________________________________________________
+
+=>Account Unlock
+
+=Syntax ( Single )
+ALTER USER username ACCOUNT UNLOCK;
+
+
+
+=Syntax ( Multi )
+ALTER USER username1,username2,... ACCOUNT UNLOCK;
+
+SELECT USER,ACCOUNT_LOCKED FROM mysql.user WHERE USER LIKE 'wym%';
+
+ALTER USER 'wym005'@'localhost','wym007'@'localhost' ACCOUNT UNLOCK;
+
+________________________________________________________
+
+=>REVOKE
+
+\q
+mysql -u root -p'sqlpassword20201A';
+
+SHOW GRANTS FOR 'wym007'@'localhost';
+
+GRANT CREATE,SELECT,INSERT ON *.* TO 'wym007'@'localhost';
+FLUCH PRIVILEGES;
+
+SHOW GRANTS FOR 'wym007'@'localhost';
+
+\q
+mysql -u wym007 -p'123456789';
+
+\q
+mysql -u root -p'sqlpassword20201A';
+
+REVOKE ALL PRIVILEGES ON *.* FROM 'wym007'@'localhost';
+
+SHOW GRANTS FOR 'wym007'@'localhost';
+
+_____________________________________________________
+
+=>GRANT Vs REVOKE
+
+\q
+mysql -u wym005 -p'123456789'
+SHOW GRANTS FOR 'wym005'@'localhost';
+
+REVOKE ALL PRIVILEGES ON *.* FROM 'wym005'@'localhost';
+
+SHOW GRANTS FOR 'wym005'@'localhost';
+
+SHOW DATABASES;
+
+\q
+mysql -u root -p'sqlpassword20201A';
+
+GRANT ALL PRIVILEGES ON wdf6534.workers TO 'wym005'@'localhost';
+FLUSH PRIVILEGES;
+
+\q
+mysql -u wym005 -p'123456789'
+
+SHOW DATABASES;
+USE wdf6534;
+SHOW TABLES;
+
+______________________________________________________

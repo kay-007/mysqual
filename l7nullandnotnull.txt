@@ -1,0 +1,36 @@
+=>NULL datatype
+CREATE TABLE stus(
+	name VARCHAR(10),
+	age INT(11)
+
+);
+
+
+INSERT INTO stus(name,age)
+VALUES ('aung aung',20)
+
+INSERT INTO stus(name,age)
+VALUES ('su su',20)
+
+INSERT INTO stus(name)
+VALUES ('ma ma')
+
+INSERT INTO stus(age)
+VALUES (20)
+
+INSERT INTO stus()
+VALUES ()
+
+DROP TABLE stus
+
+=>NOT NULL (we can call manadatory)
+
+CREATE TABLE stus(
+		name VARCHAR(10) NOT NULL
+		age INT(11) NOT NULL
+);
+
+INSERRT INTO stus(name,age)
+VALUE ('aung aung',20);
+
+

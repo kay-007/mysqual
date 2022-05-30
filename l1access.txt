@@ -1,0 +1,41 @@
+=>SEVER LOGIN
+
+CMD
+
+username = ssh kotha@dltmyanmar.com
+password = datalandtechnology
+
+username = ssh dlt@157.230.240.154
+password = datalandtechnology
+
+username = ssh kotha@dltmyanmar.net
+password = datalandtechnology
+
+username = 137.184.248.101
+password = datalandtechnology
+
+PUTTY or WINSCP
+
+Host Name = dltmyanmar.com  
+Host Name = 157.230.240.154
+Lodin as  = wdf6534
+password  = datalandtechnology
+
+_______________________________________________________________________________
+
+=>DATABASE LOGIN
+
+(Method 1)
+mysql -uWDF6534 -p 
+datalandtechnology  
+
+(Method 2)
+mysql -u WDF6534 -p
+
+exit  
+
+________________________________________________________________________________
+
+					
+
+

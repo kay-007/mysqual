@@ -1,0 +1,29 @@
+=>CHECK DATABASES
+SHOW DATABASES;
+
+=>CREATE DATABASE
+CREATE DATABASE wdf6534;
+
+=>DELETE DATABASE
+DROP DATABASE wdf6534;
+
+=>CHOOSE DATABASE
+USE wdf6534;
+
+=>CHECK CURRENT DATABASE
+SELECT database();
+
+_____________________________________________________________________
+
+=>Database Name
+CAN CREATE
+CREATE DATABASE myapp;
+CREATE DATABASE myapp123;
+CREATE DATABASE book_shop;
+
+CAN't CREATE
+CREATE DATABASE My App;
+CREATE DATABASE 123456;
+CREATE DATABASE !@#$%;
+
+______________________________________________________________________

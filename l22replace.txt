@@ -1,0 +1,30 @@
+=>REPLACE (Replace parts of strings)
+
+RELLACE Syntax
+
+SELECT REPLACE('Hello World','Hell','Zer');
+
+___________________________________________________________
+
+SELECT REPLACE('Tin Htut Aung','Aung','Maung');
+
+*no actoin
+SELECT REPLACE('Hello World','hell','Zer');
+
+SELECT REPLACE('Hello World','o','0');
+
+SELECT REPLACE('Hello World','o','A');
+
+*no action
+SELECT REPLACE('Hello World','0','A');
+
+*Case Sensitive
+SELECT REPLACE('HellO World','O','*');
+
+SELECT REPLACE('Hello World','l','7');
+
+SELECT REPLACE('cheese bread coffee milk',' ',' and ');
+
+____________________________________________________________________
+
+=>

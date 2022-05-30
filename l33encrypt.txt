@@ -1,0 +1,31 @@
+=>Encrypt
+
+=>SHA1();
+SHA1(string);
+
+*result =  11d4b9a2302990146720227030abc5177ae61baf
+SELECT SHA1('save myanmar');
+
+*result = NUll
+SELECT SHA1(NULL);
+
+
+=>MD5();
+MD5(string);
+
+*result = c79e0872a8493cd0211b8064be72033c
+SELECT MD5('save myanmar');
+
+*result = NUll
+SELECT MD5(NULL);
+
+
+_____________________________________________________
+
+HW 
+sha1 -> md5 -> result
+md5 -> sha1 -> result
+
+9EC
+______________
+

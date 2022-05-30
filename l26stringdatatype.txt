@@ -1,0 +1,373 @@
+=>Mysql DATA TYPES (Verssion V8)
+
+*String Data Types (14 types 6/6/2)
+Data Type 					Description
+1.CHAR(size)				A FIXED length string (can contain letters,numbers and spcial charscters)(0 to 255)
+2.VARCHAR(size)				A Veriable length string (can contain letters,numbers and spcial charscters)(0 to 65535)
+3.TEXT(size)				256 to 65535 (65Kb)
+4.TINYTEXT					0 to 255 (255bytes)
+5.MEDIUMTEXT				255 to 16777215 characters (16 MB)
+6.LONGTEXT					16777215 to 4294967295 characters (4 GB)
+
+7.BINARY(size)				Equal to CHAR()
+8.VARBINARY(size)			Equal to VARCHAR()
+9.BLOB(size)				FOR BLOBS 256 to 65535 (65Kb)
+10.TINYBLOG					FOR BLOBS 0 to 255 (255bytes)
+11.MEDIUMBLOB				FOR BLOBS 255 to 16777215 characters (16 MB)
+12.LONGBOLOB				FOR BLOBS 16777215 to 4294967295 characters (4 GB)
+
+13.ENUM('value1','value2',...)	A string object can have only one value. must be possible value. 65535 (65kb)
+14.SET('value1','value2',...)	A string object that can have 0 or more value. must be possible value.
+
+
+_________________________________________________________________________
+=>About CHAR
+*CHAR is faster than VARCHAR
+*Static Datatype
+*eg: Telephone numbers, ZIP code
+*eg: YES/NO Flags: Y/N
+*eg: Sex : Male/Female Flags: M/F
+
+Non-Unicode = 1 Character = 1 byte
+1 byte = 8 bit
+CHAR(4) vs VARCHAR(4)
+Value				CHAR(4)		Storage 	VARCHAR(4)		Storage
+''					'    '		4 bytes		''				1 byte
+'ab'				'ab  '		4 bytes		'ab'			3 bytes
+'abc'				'abc '		4 bytes		'abc'			4 bytes
+'abcd'				'abcd'		4 bytes		'abcd'			5 bytes
+'abcdefg'			'abcd'		4 bytes		'abcdefg'		  bytes
+
+_______________________________________________________________________
+
+
+
+CREATE TABLE contacts(
+	name CHAR(5)
+);
+
+INSERT INTO contacts (name)
+VALUES ('ko');
+
+INSERT INTO contacts (name)
+VALUES ('ko ko');
+
+INSERT INTO contacts (name)
+VALUES ('Hello');
+
+*error
+INSERT INTO contacts (name)
+VALUES ('haynow');
+
+*error
+INSERT INTO contacts (name)
+VALUES ('now hay');
+
+
+CREATE TABLE contacts(
+	name VARCHAR(5)
+);
+
+INSERT INTO contacts (name)
+VALUES ('ko');
+
+INSERT INTO contacts (name)
+VALUES ('ko ko');
+
+INSERT INTO contacts (name)
+VALUES ('Hello');
+
+*error
+INSERT INTO contacts (name)
+VALUES ('haynow');
+
+*error
+INSERT INTO contacts (name)
+VALUES ('now hay');
+
+
+13TY
+
+____________________________________________________________
+
+=>CHAR() / VARCHAR() vs TEXT()
+
+CREATE TABLE mytests(
+	id INT DEFAULT 10,
+	name VARCHAR(50)
+);
+
+DESC mytests;
+
+INSERT INTO mytests(name) VALUES('aung aung');
+
+SELECT * FROM mytests;
+
+DROP TABLE mytests;
+
+CREATE TABLE mytests (
+	id INT;
+	name VARCHAR(50) DEFAULT 'nothing to show'
+);
+
+INSERT INTO mytests(name) VALUES('aung aung');
+
+DROP TABLE mytests;
+
+
+CREATE TABLE mytests(
+	id INT;
+	name TEXT(50)
+);
+
+INSERT INTO mytests(name) VALUES('aung aung');
+
+DROP TABLE mytests;
+
+*error (BLOB,TEXT,GEOMETRY or JSON can't have a DEFAULT value)
+CREATE TABLE mytests(
+	id INT;
+	name TEXT(50) DEFAULT 'hay now'
+);
+
+______________________________________________________________________
+
+=>VARIABLES
+
+SHOW VARIABLES;
+
+SHOW CHARACTER SET;
+
+*utf8_general_ci (ci case insensitive) manlenth 3 is mean 3bytes per character 
+
+*SHOW CHARACTER SET = for a single Database
+
+Method 1
+*check charst
+SHOW VARiABLES LIKE 'character_set_database';
+*check collation
+SHOW VARIABLES LIKE 'collation_database';
+
+Method 2 ( System Variables )
+SELECT @@character_set_database;
+
+SELECT @@collation_database;
+
+Method 3
+SELECT DFAULT_CHARACTER_SET_NAME
+FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = "kotha007";
+
+SELECT DFAULT_COLLATION_NAME
+FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = "kotha007";
+
+SELECT DFAULT_CHARACTER_SET_NAME,DFAULT_COLLATION_NAME
+FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = "kotha007";
+
+*SHOW CHARACTER SET = for All Database
+SHOW DATABASES;
+SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA;
+SELECT SCHEMA_NAME 'database' FROM INFORMATION_SCHEMA.SCHEMATA;
+SELECT DEFAULT_CHARACTER_SET_NAME 'charset' FROM INFORMATIN_SCHEMA.SCHEMATA;
+SELECT DEFAULT_COLLATON_NAME 'collation' FROM INFORMATIN_SCHEMA.SCHEMATA;
+SELECT SCHEMA_NAME 'all database', DEFAULT_CHARACTER_SET_NAME 'charset', DEFAULT_COLLATION_NAME 'collation' FROM INFORMATION_SCHEMA.SCHEMATA;
+
+
+
+
+*SHOW CHARACTER SET = for a single Database
+SHOW FULL COLUMNS FROM tablename
+SHOW TABLE STATUS WHERE NAME LIKE 'tablename';
+SHOW CREATE TABLE tablename;
+
+*SHOW CHARACTER SET = for getting the collation from FIELD NAME
+SHOW FULL COLUMNS FROM tablename WHERE Field = 'name';
+
+
+
+CREATE TABLE mytests(
+	col1 TINYTEXT,
+	col2 TEXT,
+	col3 MEDIUMTEXT,
+	col4 LONGTEXT
+);
+
+DESC mytests;
+
+DROP TABLE mytests;
+
+
+CREATE TABLE mytests(
+	col1 TEXT,
+	col2 TEXT(0),
+	col3 TEXT(5),
+);
+
+DESC mytests;
+
+INSERT INTO mytests(col1,col2,col3) VALUES ('aung aung','maung maung','aung kyaw kyaw');
+
+SELECT * FROM mytests;
+
+DROP TABLE mytests;
+
+CREATE TABLE mytests(
+	col1 TEXT(255), -- 1-255 tinytext
+	col2 TEXT(65535), --256-65535 text
+	col3 TEXT(16777215), --65535-16777215 mediumtext
+	col4 TEXT(4294967295) --16777215-4294967295 longtest
+) ENGINE=InnoDB CHARSET=latin1;
+
+DESC mytests;
+
+DROP TABLE mystests;
+
+CREATE TABLE mytests(
+	col1 TEXT(255), -- 1-255 tinytext
+	col2 TEXT(65535), --256-65535 text
+	col3 TEXT(16777215), --65535-16777215 mediumtext
+	col4 TEXT(4294967295) --16777215-4294967295 longtest
+) ENGINE=InnoDB CHARSET=latin2;
+
+SHOW FULL COLUMNS FROM mytests
+
+SHOW TABLE STATUS WHERE NAME LIKE 'mytest';
+
+SHOW CREATE TABLE mytests;
+
+DROP TABLE mytests;
+
+CREATE TABLE mytests(
+	col1 TEXT(255), -- 1-255 tinytext
+	col2 TEXT(65535), --256-65535 text
+	col3 TEXT(16777215), --65535-16777215 mediumtext
+	col4 TEXT(4294967295) --16777215-4294967295 longtest
+) ENGINE=InnoDB CHARSET=utf8;
+
+DESC mytests;
+
+DROP TABLE mytests;
+
+CREATE TABLE mytests(
+	col1 TEXT(85), -- 1-85 /3 tinytext
+	col2 TEXT(21845), --86-21845 .3 text
+	col3 TEXT(5592405), --21846-5592405 /3  mediumtext
+	col4 TEXT(4294967295) --5592406-4294967295 longtest
+) ENGINE=InnoDB CHARSET=utf8;
+
+DESC mytests;
+
+SHOW TABLE STATUS NAME LIKE 'mytests';
+
+14CS
+
+
+11PLT
+
+______________________________________________________________________
+
+=>Example char and binary
+
+CREATE TABLE mytests(
+col1 CHAR,
+col2 CHAR(255)
+);
+
+DESC mytests;
+DROP TABLE mytests;
+
+*error in 256
+CREATE TABLE mytests(
+col1 CHAR,
+col2 CHAR(256)
+);
+
+CREATE TABLE mytests(
+col1 BINARY,
+col2 BINARY(255)
+);
+
+DESC mytests;
+DROP TABLE mytests;
+
+*error in 256
+CREATE TABLE mytests(
+col1 BINARY,
+col2 BINARY(256)
+);
+
+CREATE TABLE mytests(
+col1 BINARY(30)
+);
+
+INSERT INTO mytests (col1) VALUE('ko ko aung');
+
+SELECT * FROM mytests;
+
+________________________________________________________________
+
+ENUM (enumeration)
+
+CREATE TABLE motos(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(50),
+	gender ENUM('M','F','Other') NOT NULL
+);
+
+DESC motos;
+
+INSERT INTO motos (name,gender) VALUE ('aung aung','M');
+
+SELECT * FROM motos;
+
+*error
+INSERT INTO motos (name,gender) VALUE ('aung aung','K');
+
+INSERT INTO motos (name,gender) VALUE ('hla hla','f');
+INSERT INTO motos (name,gender) VALUE ('mya mya','OTHER');
+INSERT INTO motos (name,gender) VALUE ('mya mya',1);
+INSERT INTO motos (name,gender) VALUE ('mya mya',2);
+INSERT INTO motos (name,gender) VALUE ('mya mya',3);
+INSERT INTO motos (name,gender) VALUE ('mya mya','1');
+INSERT INTO motos (name,gender) VALUE ('mya mya','2');
+INSERT INTO motos (name,gender) VALUE ('mya mya','3');
+
+*error
+INSERT INTO motos (name,gender) VALUE ('mya mya',4);
+INSERT INTO motos (name,gender) VALUE ('mya mya','m,f');
+
+
+
+
+=>SET
+
+CREATE TABLE motas(
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	name VARCHAR(50),
+	role SET('C','R','U','D') NOT NULL
+);
+
+DESC motas;
+
+INSERT INTO motas(name,role) VALUES('aung aung','C');
+INSERT INTO motas(name,role) VALUES('su su','d');
+INSERT INTO motas(name,role) VALUES('nu nu','3');
+INSERT INTO motas(name,role) VALUES('nu nu','C,R');
+INSERT INTO motas(name,role) VALUES('nu nu','c,r,d');
+
+*result = c,r,u,d
+INSERT INTO motas(name,role) VALUES('nu nu','c,r,d,u,c');
+
+*error
+INSERT INTO motas(name,role) VALUES('nu nu','1,2');
+INSERT INTO motas(name,role) VALUES('nu nu',1,2);
+INSERT INTO motas(name,role) VALUES('nu nu','k');
+INSERT INTO motas(name,role) VALUES('nu nu','c,k');
+
+
+
+SELECT * FROM motas;
+
+12EN
+
+
+________________________________________________________________

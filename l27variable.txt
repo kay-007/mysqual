@@ -1,0 +1,161 @@
+=>VARIABLE
+
+@@ - System Variable
+NOTE:: @@ is used for system variables prefix. Global value of the system variable.
+
+
+@ - User Defined Variable
+NOTE:: while @ is used for user defined variables;
+
+What is a VARIABLE
+*value assgin
+*value can change or overwrite
+
+
+Use for VARIABLE
+counter in looping
+save value
+use in conditional logic
+
+______________________________________________
+
+SHOW VARIABLES;
+
+
+=>@ - USER DEFINED VARIABLES
+
+*Method 1 ( using SELECT  )
+
+SELECT @myfirstvar := 'Hello Myanmar';
+
+SELECT @myfirstvar;
+
+SELECT @myfirstvar := 'Save Myanmat';
+
+SELECT @myfirstvar;
+
+
+
+*Method 2 ( using SET )
+
+SET @mysecondvar = 'Data Land';
+
+SELECT @mysecondvar;
+
+SET @mysecondvar = 'Tin Htut Aung';
+
+SELECT @mysecondvar;
+
+
+
+SELECT @num1 := 10;
+SELECT @num2 := 20;
+SELECT @num1;
+SELECT @num2;
+SELECT @num1+@num2;
+
+
+SELECT @num3 := 10;
+SELECT @num4 := 20;
+SELECT @num3;
+SELECT @num4;
+SELECT @num3+@num;
+
+
+SELECT @num3 := '30';
+SELECT @num4 := '40';
+SELECT @num3;
+SELECT @num4;
+SELECT @num3+@num;
+
+SELECT @num1,@num2.@num3,@num4;
+
+SELECT @num1 AS numberone,@num2 AS number2;
+SELECT @num1 AS numberone,@num2 AS number2;
+SELECT @num1 AS numberone,@num2 AS number2,@num3+@num4;
+SELECT @num1 AS numberone,@num2 AS number2,@num5 := @num3+@num4;
+SELECT @num1 AS numberone,@num2 AS number2,@num5 := @num3+@num4 AS number5;
+SELECT @num5;
+
+
+
+SELECT * FROM employees;
+
+SELECT name,age,salary,city FROM employees
+WHERE age > 20;
+
+SELECT @num2 := 20;
+SELECT name,age,salary,city FROM employees
+WHERE age > @num2;
+
+
+SET @90k = 90000;
+SELECT name,age,salary,city FROM employees
+WHERE salary > @90k;
+
+_________________________________________________________
+
+=>WARNING
+
+* Show Warnings Count
+SHOW COUNT(*) WARNINGS;
+SELECT @@warning_count;
+
+*Show Warnings;
+SHOW WARNINGS;
+SHOW WARNINGS LIMIT 3;
+SHOW WARNINGS\G;
+
+help;
+Note: \G modifier  (ego       (\G) Send command to mysql server, display result vertically.)
+
+
+SELECT * FROM tablename\G;
+
+Note: warnings  (\W) Show warnings after every statement.
+Note: nowarning (\w) Don't show warnings after every statement.
+
+Eg: SELECT 1/0;
+
+=>ERROR
+*Show Error Count
+SHOW COUNT(*) ERRORS;
+SELECT @@error_count;
+
+*Show Errors
+SHOW ERRORS;
+SHOW ERRORS\G;
+
+Eg: DROP TABLE abc; SELECT myfun();
+
+
+
+=>Change Error Count Setting;
+SHOW VARIABLES LIKE 'max_error_count';
+SET max_error_count=1024;
+
+_________________________________________________________
+help;
+
+=Important SELECT Queries
+
+=>Check User
+status;
+SELECT USER();
+SELECT USER() AS 'ko ko';
+
+__________________________________________________________
+
+=>Get Mysql Time Zone
+
+SHOW VARIABLES LIKE "%time_zone%";
+SELECT @@time_zone;
+SELECT @@global.time_zone,@@session.time_zone;
+
+
+=>Change Mysql timezone
+SET time_zone = "+07:00";
+SET GLOBAL time_zone = "+07:00";
+SET @@global.time_zone = "+06:30";
+
+
